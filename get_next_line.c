@@ -10,4 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 
+char	*get_next_line(int fd)
+{
+	char *str;
+	int j =0;
+
+	read(fd,str,1);
+	j++;
+	str[1] = '\0';
+	return (str);
+}

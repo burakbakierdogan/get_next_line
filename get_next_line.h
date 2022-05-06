@@ -10,4 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 char	*get_next_line(int fd);
+int	ft_fd(char *str, char *mod);
