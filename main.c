@@ -6,7 +6,7 @@ int main ()
 	fd = open("burak.txt", O_RDONLY);
 	char *str;
 
-	int n = 9;
+	int n = 20;
 	while (n--)
 	{
 		str = get_next_line(fd);
