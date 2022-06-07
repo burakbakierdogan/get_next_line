@@ -7,10 +7,7 @@ int main ()
 	char *str;
 
 	int n = 20;
-	while (n--)
-	{
 		str = get_next_line(fd);
 		printf("%s", str);
-	}
 
 }
