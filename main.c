@@ -8,7 +8,7 @@ int main ()
 
 	int n = 5;
 
-	
+
 		str = get_next_line(fd);
 		printf("%s", str);
 
