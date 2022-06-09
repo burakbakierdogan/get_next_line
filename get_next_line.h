@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:29:04 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/07 15:19:00 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/09 16:28:54 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,9 @@
 
 char	*get_next_line(int fd);
 int	ft_fd(char *str, char *mod);
+
+
+
+int	ft_ncounter(int fd);
 
 #endif

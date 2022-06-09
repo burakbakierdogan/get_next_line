@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:28:57 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/07 17:03:36 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:27:56 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,14 @@
 
 char	*get_next_line(int fd)
 {
-	char *str;
-	char *ptr;
-	str = (char *) malloc (BUFFER_SIZE);
-	bzero(str, BUFFER_SIZE);
+	void *buf;
+
+	buf = malloc (BUFFER_SIZE);
+	bzero(buf, BUFFER_SIZE);
 	int a = 0;
-	while (a < BUFFER_SIZE)
-	{
-		if (str[a] == '\n')
-			return (str);
-		read (fd, str + a, 1);
-		a++;
-	}
-	printf("burak\n");
-	return (str);
+	int k;
+	k = 0;
+	while (buf[a-1] != '\n')
+		read (fd, buf + a + BUFFER_SIZE, BUFFER_SIZE);
+	return ((char *)buf);
 }
