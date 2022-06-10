@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:28:57 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/09 17:36:49 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/10 10:25:33 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@ char	*get_next_line(int fd)
 	bzero(buf, BUFFER_SIZE);
 	int a = 0;
 	int k;
-	k = 0;
-	while (buf[a-1] != '\n')
-		read (fd, buf + a++, 1);
-	return ((char *)buf);
+	k = BUFFER_SIZE;
+	read (fd, buf + a++, 1);
+	while (k--)
+	{
+		read(fd, buf + a++, 1);
+		if (buf[a-1] == '\n')
+			return (buf);
+	}
+	return (buf);
 }
