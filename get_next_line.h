@@ -24,12 +24,12 @@
 # define BUFFER_SIZE 10
 # endif
 
-
+char	*ft_gcalloc(size_t nmemb, size_t size);
 char	*get_next_line(int fd);
-int	ft_fd(char *str, char *mod);
+char	*ft_gmemcpy(size_t	nmemb, char *dest, char *source);
 
 
 
-int	ft_ncounter(int fd);
+
 
 #endif

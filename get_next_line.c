@@ -14,19 +14,25 @@
 
 char	*get_next_line(int fd)
 {
-	char *buf;
+	char	*buf;
+	char	*str;
+	int		index;
+	int		index2;
 
-	buf = malloc (BUFFER_SIZE);
-	bzero(buf, BUFFER_SIZE);
-	int a = 0;
-	int k;
-	k = BUFFER_SIZE;
-	read (fd, buf + a++, 1);
-	while (k--)
+	buf = (char *) malloc (BUFFER_SIZE * sizeof(char));
+	index = 0;
+	index2 = BUFFER_SIZE;
+	while (index2--)
 	{
-		read(fd, buf + a++, 1);
-		if (buf[a-1] == '\n')
+		read(fd, (buf + index++), 1);
+		if (buf[index-1] == '\n')
 			return (buf);
 	}
 	return (buf);
+	str = (char *) malloc ((BUFFER_SIZE - index2) * sizeof (char));
+	if (!str)
+		return (NULL);
+	ft_gmemcpy((BUFFER_SIZE - index2), str, buf);
+	free(buf);
+	return (str);
 }

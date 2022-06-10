@@ -12,17 +12,33 @@
 
 #include "get_next_line.h"
 
-int	ft_ncounter(int fd)
+char	*ft_gmemcpy(size_t	nmemb, char *dest, char *source)
 {
-	int	index;
+	size_t	index;
 
 	index = 0;
-	char *str;
-	while (*str != '\n')
+	nmemb++;
+	while (nmemb--)
 	{
-		read(fd,str,1);
+		dest[index] = source[index];
 		index++;
 	}
-	return index;
+	return (dest);
 }
 
+/*char	*ft_gcalloc(size_t nmemb, size_t size)
+{
+	void	*ptr;
+	size_t	i;
+	int		j;
+
+	j = 0;
+	i = nmemb;
+	ptr = (char *) malloc (nmemb * size);
+	if (!ptr)
+		return (NULL);
+	while (i--)
+		ptr[j++] = '\0';
+	return (ptr);
+}
+*/
