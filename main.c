@@ -3,13 +3,14 @@
 int main ()
 {
 	int fd;
-	fd = open("burak.txt", O_RDONLY);
+	fd = open("deneme.txt", O_RDONLY);
 	char *str;
 
-	int n = 5;
+	int n = 98;
 
-
-		str = get_next_line(fd);
+	while(n--)
+	{	str = get_next_line(fd);
 		printf("%s", str);
+	}
 
 }

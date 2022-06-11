@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:28:57 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/10 10:25:33 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:26:53 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ char	*get_next_line(int fd)
 	buf = (char *) malloc (BUFFER_SIZE * sizeof(char));
 	index = 0;
 	index2 = BUFFER_SIZE;
-	while (index2--)
+	while (--index2)
 	{
 		read(fd, (buf + index++), 1);
 		if (buf[index-1] == '\n')
-			return (buf);
+			break;
 	}
-	return (buf);
 	str = (char *) malloc ((BUFFER_SIZE - index2) * sizeof (char));
 	if (!str)
 		return (NULL);
