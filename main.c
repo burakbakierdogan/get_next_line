@@ -3,10 +3,10 @@
 int main ()
 {
 	int fd;
-	fd = open("deneme.txt", O_RDONLY);
+	fd = open("burak.txt", O_RDONLY);
 	char *str;
 
-	int n = 98;
+	int n = 1;
 
 	while(n--)
 	{	str = get_next_line(fd);

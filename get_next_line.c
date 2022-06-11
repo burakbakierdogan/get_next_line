@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:28:57 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/11 18:26:53 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:21:38 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,23 @@ char	*get_next_line(int fd)
 	int		index2;
 
 	buf = (char *) malloc (BUFFER_SIZE * sizeof(char));
+	if(!buf)
+		return (NULL);
 	index = 0;
 	index2 = BUFFER_SIZE;
-	while (--index2)
+	if (index2 == 1)
+	{
+		read(fd, (buf), 1);
+		return (buf);
+	}
+	while (index2 > 0)
 	{
 		read(fd, (buf + index++), 1);
+		index2--;
 		if (buf[index-1] == '\n')
 			break;
 	}
-	str = (char *) malloc ((BUFFER_SIZE - index2) * sizeof (char));
+	str = (char *) malloc ((BUFFER_SIZE) * sizeof (char));
 	if (!str)
 		return (NULL);
 	ft_gmemcpy((BUFFER_SIZE - index2), str, buf);
