@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:28:57 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/11 23:21:38 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:56:29 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,26 @@ char	*get_next_line(int fd)
 	char	*str;
 	int		index;
 	int		index2;
+	int		ret;
 
-	buf = (char *) malloc (BUFFER_SIZE * sizeof(char));
-	if(!buf)
-		return (NULL);
 	index = 0;
+	ret = 1;
 	index2 = BUFFER_SIZE;
+	buf = (char *) malloc (BUFFER_SIZE * sizeof(char));
+
 	if (index2 == 1)
 	{
-		read(fd, (buf), 1);
+		ret = read(fd, (buf), 1);
+		if (ret == 0 || ret == -1)
+			return (NULL);
 		return (buf);
 	}
 	while (index2 > 0)
 	{
-		read(fd, (buf + index++), 1);
+		ret = read(fd, (buf + index++), 1);
 		index2--;
+		if (ret == -1 || ret == 0)
+			return (NULL);
 		if (buf[index-1] == '\n')
 			break;
 	}
