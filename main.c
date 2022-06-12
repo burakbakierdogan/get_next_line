@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:26:40 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/12 17:48:05 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/12 17:51:28 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,4 @@ int main ()
 		printf("%s", str);
 	}
 }
-
+deenme,e,e,e,e
