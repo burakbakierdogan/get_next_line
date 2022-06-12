@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:29:01 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/12 16:21:57 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/12 16:33:25 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ char	*ft_get_memcpy(size_t	nmemb, char *dest, char *source)
 	return (dest);
 }
 
+int	ft_return_line(int index, int fd, char *buf)
+{
+	int	index2;
+
+	index2 = 0;
+	
+}
 /*char	*ft_get_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
