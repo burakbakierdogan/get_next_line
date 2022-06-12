@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:29:04 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/09 16:28:54 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/12 16:03:11 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 # define BUFFER_SIZE 10
 # endif
 
-char	*ft_gcalloc(size_t nmemb, size_t size);
+char	*ft_get_calloc(size_t nmemb, size_t size);
 char	*get_next_line(int fd);
-char	*ft_gmemcpy(size_t	nmemb, char *dest, char *source);
+char	*ft_get_memcpy(size_t	nmemb, char *dest, char *source);
 
 
 
