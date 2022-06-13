@@ -6,17 +6,21 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:29:01 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/13 10:14:37 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:09:17 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_get_memcpy(size_t	nmemb, char *dest, char *source)
+char	*ft_get_memcpy(size_t	nmemb, char *source)
 {
 	size_t	index;
-
+	char 	*dest;
 	index = 0;
+
+	dest = (char *) malloc (nmemb * sizeof(char));
+	if (!dest)
+		return (NULL);
 	while (nmemb--)
 	{
 		dest[index] = source[index];

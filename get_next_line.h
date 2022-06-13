@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:29:04 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/12 16:03:11 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:09:50 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 char	*ft_get_calloc(size_t nmemb, size_t size);
 char	*get_next_line(int fd);
-char	*ft_get_memcpy(size_t	nmemb, char *dest, char *source);
+char	*ft_get_memcpy(size_t	nmemb, char *source);
 
 
 
