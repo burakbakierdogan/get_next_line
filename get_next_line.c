@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:28:57 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/12 17:01:03 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/13 10:14:04 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ char	*get_next_line(int fd)
 		if (buf[index-1] == '\n')
 			break;
 	}
-
-	str = (char *) malloc ((r_total) * sizeof (char));
+//return (buf);
+	str = (char *) malloc ((r_total + 1) * sizeof (char));
 	if (!str)
 		return (NULL);
 	ft_get_memcpy((r_total), str, buf);

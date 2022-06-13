@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:26:40 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/12 17:52:28 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/06/13 10:14:53 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main ()
 {
 	int fd;
-	fd = open("burak.txt", O_RDONLY);
+	fd = open("deneme.txt", O_RDONLY);
 	char *str;
 
 	int n = 18;
