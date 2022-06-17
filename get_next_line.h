@@ -24,9 +24,9 @@
 # define BUFFER_SIZE 10
 # endif
 
-char	*ft_get_calloc(size_t nmemb, size_t size);
+
 char	*get_next_line(int fd);
-char	*ft_get_memcpy(size_t	nmemb, char *source);
+
 
 
 

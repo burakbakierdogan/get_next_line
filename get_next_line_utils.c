@@ -12,23 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*ft_get_memcpy(size_t	nmemb, char *source)
-{
-	size_t	index;
-	char 	*dest;
-	index = 0;
 
-	dest = (char *) malloc (nmemb * sizeof(char));
-	if (!dest)
-		return (NULL);
-	while (nmemb--)
-	{
-		dest[index] = source[index];
-		index++;
-	}
-	dest[index] = '\0';
-	return (dest);
-}
 
 /*int	ft_return_line(int index, int fd, char *buf)
 {
