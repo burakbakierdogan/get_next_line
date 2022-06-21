@@ -24,6 +24,9 @@
 # define BUFFER_SIZE 10
 # endif
 
+#ifndef CONTAINER_SIZE
+# define CONTAINER_SIZE 1000000
+# endif
 
 char	*get_next_line(int fd);
 

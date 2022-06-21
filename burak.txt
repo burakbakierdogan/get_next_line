@@ -1,12 +1,9 @@
-burak baki erdogan
-xxxxxxxx3333333
-xxxxxxxx2323
-xxxxxxxx
-xxxxxxxx
-xxxxxxxx
-xxxxxxxx
-xxxxxxxx
-xxxxxxxx
-1
-22
-333
+BUFFER_SIZE kadar okunacak
+newline donderilecek
+
+BUFFERSIZE icinde newline yoksa;
+newline bulana kadar okumaya devam
+
+BUFFER_SIZE icinde newline var;
+newline donderilir geri kalan kaydedilir
+
