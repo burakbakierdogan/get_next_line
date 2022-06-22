@@ -1,9 +1,5 @@
-BUFFER_SIZE kadar okunacak
-newline donderilecek
+Bir tane container var
+bir container'in ici bos ise
+read ile newline dusurulmeye calisilir
 
-BUFFERSIZE icinde newline yoksa;
-newline bulana kadar okumaya devam
-
-BUFFER_SIZE icinde newline var;
-newline donderilir geri kalan kaydedilir
 
