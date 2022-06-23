@@ -92,6 +92,24 @@ int	ft_no_nline(char *buf, char *str, int t_read, int fd)
 	return (t_read);
 }
 
+int	ft_y_nline(char *buf, char *str, int t_read)
+{
+
+	int	ft_t_read;
+
+	ft_t_read = t_read;
+	t_read = ft_move(buf, str, t_read);
+	if (t_read <= 0)
+	{
+		free(buf);
+		buf = NULL;
+		return (0);
+	}
+	if (t_read)
+		t_read = ft_mmove(buf, t_read, ft_t_read);
+	return (t_read);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*buf = NULL;
@@ -114,19 +132,11 @@ char	*get_next_line(int fd)
 
 		if (ft_is_nline(buf, t_read) == 0)
 			t_read = ft_no_nline(buf, str, t_read, fd);
-		else if (ft_is_nline(buf, t_read))
+		else
 		{
-			int f_t_read = t_read;
-			t_read = ft_move(buf, str, t_read);
-			if (t_read == 0)
-			{
-				free(buf);
-				buf = NULL;
-				return (0);
-			}
-			if (t_read)
-			t_read = ft_mmove(buf, t_read, f_t_read);
+			t_read = ft_y_nline(buf, str, t_read);
 		}
+
 	}
 	return (str);
 }
