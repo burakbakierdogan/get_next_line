@@ -12,87 +12,121 @@
 
 #include "get_next_line.h"
 
-
-int	ft_is_newline(char *cont, int index)
+int	ft_is_nline(char *buf, int t_read)
 {
 	int	total;
-	int	index2;
 
-	index2 = 0;
 	total = 0;
-	while (index)
+	while (t_read)
 	{
-		if (cont[index--] == '/n')
+		if (buf[t_read--] == '\n')
 			total++;
 	}
-	if (total)
-	{
-		while (cont[index2] != '\n')
-			index2++;
-		return (index2);
-	}
-	return (0);
+	return (total);
 }
-int	ft_empty_cont(char *cont, char *cont2, int index)
+
+int	ft_move(char *buf, char *str, int t_read)
 {
-	int		index2;
+	int	index;
 
-	index2 = 0;
-	if (cont2 == NULL)
-		cont2 = (char *) malloc (index + 1 * sizeof(char));
-	if (!cont)
-		return (NULL);
-	while (index--)
+	index = 0;
+	if (t_read == 0)
+		return (0);
+	str = (char *) malloc ((t_read + 1) * sizeof(char));
+	if (!str)
+		return (0);
+	while (t_read && buf[index] != '\n')
 	{
-		cont2[index2] == cont[index2];
-		index2++;
+		str[index] = buf[index];
+		index++;
+		t_read--;
 	}
-	return (index2);
-}
-int	ft_mmove(char *dest, char *source, int index)
-{
-	int index2;
 
-	index2 = index;
-	while (index--)
-		dest[index] = source[index];
-	return (index2);
-}
-
-int	ft_nl_searhcer(char *cont, int index)
-{
-	char *dest;
-	int total_nl;
-
-	total_nl = ft_is_newline(cont, index);
-	if (total_nl)
+	if (t_read != 0)
 	{
-		dest = ft_move(dest, cont, index);
+		str[index++] = '\n';
+		str[index] = '\0';
 	}
+	if (t_read == 0)
+		str[index] = '\0';
+	return (t_read);
 }
 
+int	ft_mmove(char *buf, int t_read, int f_t_read)
+{
+	int total;
 
+	total = t_read;
+	while (t_read)
+	{
+		buf[t_read] = buf[f_t_read];
+		t_read--;
+		f_t_read--;
+	}
+	return (total);
+}
+
+int	ft_no_nline(char *buf, char *str, int t_read, int fd)
+{
+	int	r_read;
+	int	f_t_read;
+
+	r_read = 0;
+	f_t_read = t_read;
+	while (ft_is_nline(buf, t_read) == 0)
+	{
+		r_read = read (fd, buf + t_read, BUFFER_SIZE);
+		t_read += r_read;
+		if (r_read == 0 || r_read == -1)
+			break;
+	}
+	t_read = ft_move(buf, str, t_read);
+	if (t_read == 0)
+	{
+		free(buf);
+		buf = NULL;
+		return (0);
+	}
+	if (t_read)
+		t_read = ft_mmove(buf, t_read, f_t_read);
+	return (t_read);
+}
 
 char	*get_next_line(int fd)
 {
-	char	buf[BUFFER_SIZE];
-	static char	*cont2 = NULL;
-	static int	index = 0;
-	int			rret;
+	static char	*buf = NULL;
+	char		*str;
+	int			r_read = 0;
+	static int	t_read = 0;
 
-	rret = 0;
-	if (index == 0)
+	if (t_read == 0)
 	{
-		rret = read (fd, buf, BUFFER_SIZE);
-		if (rret == 0 || rret == -1)
+		buf = (char *) malloc (CONTAINER_SIZE * sizeof (char));
+		if (!buf)
+			return (NULL);
+		r_read = read (fd, buf, BUFFER_SIZE);
+		t_read += r_read;
+		if (r_read == -1 || r_read == 0)
 			return (NULL);
 	}
-	if (index)
+	if (t_read)
 	{
-		index =
+
+		if (ft_is_nline(buf, t_read) == 0)
+			t_read = ft_no_nline(buf, str, t_read, fd);
+		else if (ft_is_nline(buf, t_read))
+		{
+			int f_t_read = t_read;
+			t_read = ft_move(buf, str, t_read);
+			if (t_read == 0)
+			{
+				free(buf);
+				buf = NULL;
+				return (0);
+			}
+			if (t_read)
+			t_read = ft_mmove(buf, t_read, f_t_read);
+		}
 	}
-
-
-
-
+	return (str);
 }
