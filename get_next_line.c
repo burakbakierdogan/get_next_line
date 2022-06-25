@@ -12,131 +12,58 @@
 
 #include "get_next_line.h"
 
-int	ft_is_nline(char *buf, int t_read)
+char	*ft_nl(int fd, int t_ret, char buf)
 {
-	int	total;
+	int r_ret;
 
-	total = 0;
-	while (t_read)
+	r_ret = 0;
+	while (ft_is_nl(buf, r_ret) == 0)
 	{
-		if (buf[t_read--] == '\n')
-			total++;
-	}
-	return (total);
-}
-
-int	ft_move(char *buf, char *str, int t_read)
-{
-	int	index;
-
-	index = 0;
-	if (t_read == 0)
-		return (0);
-	str = (char *) malloc ((t_read + 1) * sizeof(char));
-	if (!str)
-		return (0);
-	while (t_read && buf[index] != '\n')
-	{
-		str[index] = buf[index];
-		index++;
-		t_read--;
-	}
-
-	if (t_read != 0)
-	{
-		str[index++] = '\n';
-		str[index] = '\0';
-	}
-	if (t_read == 0)
-		str[index] = '\0';
-	return (t_read);
-}
-
-int	ft_mmove(char *buf, int t_read, int f_t_read)
-{
-	int total;
-
-	total = t_read;
-	while (t_read)
-	{
-		buf[t_read] = buf[f_t_read];
-		t_read--;
-		f_t_read--;
-	}
-	return (total);
-}
-
-int	ft_no_nline(char *buf, char *str, int t_read, int fd)
-{
-	int	r_read;
-	int	f_t_read;
-
-	r_read = 0;
-	f_t_read = t_read;
-	while (ft_is_nline(buf, t_read) == 0)
-	{
-		r_read = read (fd, buf + t_read, BUFFER_SIZE);
-		t_read += r_read;
-		if (r_read == 0 || r_read == -1)
+		r_ret = read(fd, buf + t_ret, BUFFERSIZE);
+		t_ret += r_ret;
+		if (r_ret == 0 || r_ret == -1)
 			break;
 	}
-	t_read = ft_move(buf, str, t_read);
-	if (t_read == 0)
-	{
-		free(buf);
-		buf = NULL;
-		return (0);
-	}
-	if (t_read)
-		t_read = ft_mmove(buf, t_read, f_t_read);
-	return (t_read);
+	if (r_ret != -1 || r_ret != 0 && t_ret)
+		{
+
+		}
 }
-
-int	ft_y_nline(char *buf, char *str, int t_read)
+int	ft_t_ret_zero(int fd, char *buf)
 {
+	int	t_ret;
 
-	int	ft_t_read;
-
-	ft_t_read = t_read;
-	t_read = ft_move(buf, str, t_read);
-	if (t_read <= 0)
-	{
-		free(buf);
-		buf = NULL;
+	t_ret = 0;
+	t_ret = read(fd, buf, BUFFERSIZE);
+	if (r_ret == -1 || r_ret == 0)
 		return (0);
-	}
-	if (t_read)
-		t_read = ft_mmove(buf, t_read, ft_t_read);
-	return (t_read);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*buf = NULL;
+	static int	t_ret = 0;
 	char		*str;
-	int			r_read = 0;
-	static int	t_read = 0;
 
-	if (t_read == 0)
+	if (!buf)
+		buf = (char *) malloc (CONTAINER_SIZE * sizeof(char));
+	if (!buf)
+		return (NULL);
+	if (!t_ret)
+		t_ret = ft_t_ret_zero(fd, buf);
+	if (!t_ret)
+		return (NULL);
+	if (ft_is_nl(buf, t_ret))
 	{
-		buf = (char *) malloc (CONTAINER_SIZE * sizeof (char));
-		if (!buf)
-			return (NULL);
-		r_read = read (fd, buf, BUFFER_SIZE);
-		t_read += r_read;
-		if (r_read == -1 || r_read == 0)
-			return (NULL);
+		t_ret = 0;
+		str = 0;
+
 	}
-	if (t_read)
+	else
 	{
-
-		if (ft_is_nline(buf, t_read) == 0)
-			t_read = ft_no_nline(buf, str, t_read, fd);
-		else
-		{
-			t_read = ft_y_nline(buf, str, t_read);
-		}
-
+		t_ret = 0;
+		str = 0;
+		
 	}
 	return (str);
 }
