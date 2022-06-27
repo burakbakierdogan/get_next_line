@@ -31,6 +31,11 @@
 char	*get_next_line(int fd);
 
 int	ft_start(int fd, char *buf);
+int	ft_is_nl(char *buf, int size);
+int	ft_len(char *buf);
+char	*ft_move(char *dest, char *source, int size);
+char	*ft_newstr(char *buf, char size);
+char	*ft_write(char *buf, int fd, int rret);
 
 
 

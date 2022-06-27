@@ -43,7 +43,7 @@ int	ft_len(char *buf)
 	int	index;
 
 	index = 0;
-	while (buf[index] != '\n' || buf[index] == '\0')
+	while (buf[index] != '\n' || buf[index] != '\0')
 		index++;
 	return (index);
 }
@@ -59,11 +59,11 @@ char	*ft_move(char *dest, char *source, int size)
 		return (NULL);
 	while (index < size)
 	{
-		temp[index] = source[index]
+		temp[index] = source[index];
 		size++;
 	}
 	index = 0;
-	while (i < size)
+	while (index < size)
 	{
 		dest[index] = temp[index];
 		index++;
@@ -93,10 +93,7 @@ char	*ft_newstr(char *buf, char size)
 	ft_move(buf, buf + len, size - len);
 	return (str);
 }
-char	*ft_lastmove(char *source, int size)
-{
 
-}
 char	*ft_write(char *buf, int fd, int rret)
 {
 	int		index;
@@ -116,7 +113,11 @@ char	*ft_write(char *buf, int fd, int rret)
 		}
 	}
 	if (ft_is_nl(buf, rret) == 0)
+	{
 		str = NULL;
+		buf[rret + 1] = '\0';
+	}
 	else
-	str = 
+		str = ft_newstr(buf, rret);
+	return (str);
 }

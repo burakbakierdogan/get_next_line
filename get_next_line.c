@@ -36,8 +36,10 @@ char	*get_next_line(int fd)
 	}
 	else
 	{
-		
-
+		str = ft_write(buf, fd, rret);
+		if (!str)
+			return (buf);
+		rret = ft_len(buf);
 	}
 	return (str);
 }
