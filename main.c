@@ -15,7 +15,7 @@
 int main ()
 {
 	int fd;
-	fd = open("deneme.txt", O_RDONLY);
+	fd = open("burak.txt", O_RDONLY);
 	char *str;
 
 	int n = 12;
@@ -23,7 +23,7 @@ int main ()
 
 
 		str = get_next_line(fd);
-		printf("%s\n", str);
+		printf("%s", str);
 
 }
 

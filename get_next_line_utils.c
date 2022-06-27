@@ -14,26 +14,109 @@
 
 
 
-/*int	ft_return_line(int index, int fd, char *buf)
+int	ft_start(int fd, char *buf)
 {
-	int	index2;
+	int	rret;
 
-	index2 = 0;
-
-}*/
-/*char	*ft_get_calloc(size_t nmemb, size_t size)
-{
-	void	*ptr;
-	size_t	i;
-	int		j;
-
-	j = 0;
-	i = nmemb;
-	ptr = (char *) malloc (nmemb * size);
-	if (!ptr)
-		return (NULL);
-	while (i--)
-		ptr[j++] = '\0';
-	return (ptr);
+	rret = 0;
+	rret = read(fd, buf, BUFFER_SIZE);
+	if (rret == -1 || rret == 0)
+		return (0);
 }
-*/
+
+int	ft_is_nl(char *buf, int size)
+{
+	int	index;
+
+	index = 0;
+	while (size >= 0)
+	{
+		if (buf[size] == '\n')
+			index++;
+		size--;
+	}
+	return (index);
+}
+
+int	ft_len(char *buf)
+{
+	int	index;
+
+	index = 0;
+	while (buf[index] != '\n' || buf[index] == '\0')
+		index++;
+	return (index);
+}
+
+char	*ft_move(char *dest, char *source, int size)
+{
+	int		index;
+	char	*temp;
+
+	index = 0;
+	temp = (char *) malloc ((size + 1) * sizeof(char));
+	if (!temp)
+		return (NULL);
+	while (index < size)
+	{
+		temp[index] = source[index]
+		size++;
+	}
+	index = 0;
+	while (i < size)
+	{
+		dest[index] = temp[index];
+		index++;
+	}
+	free (temp);
+	return (dest);
+
+}
+
+char	*ft_newstr(char *buf, char size)
+{
+	int		len;
+	int		index;
+	char	*str;
+
+	index = 0;
+	len = ft_len(buf);
+	str = (char *) malloc ((len + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	while (index < len)
+	{
+		str[index]= buf[index];
+		index++;
+	}
+	str[index] = '\0';
+	ft_move(buf, buf + len, size - len);
+	return (str);
+}
+char	*ft_lastmove(char *source, int size)
+{
+
+}
+char	*ft_write(char *buf, int fd, int rret)
+{
+	int		index;
+	char	*str;
+
+	index = rret;
+	while (ft_is_nl(buf, rret) == 0)
+	{
+		index = read (fd, buf + rret, BUFFER_SIZE);
+		rret += index;
+		if (index == 0)
+			break;
+		if (index == -1)
+		{
+			rret++;
+			break;
+		}
+	}
+	if (ft_is_nl(buf, rret) == 0)
+		str = NULL;
+	else
+	str = 
+}

@@ -1,5 +1,2 @@
-Bir tane container var
-bir container'in ici bos ise
-read ile newline dusurulmeye calisilir
-
+0123456
 

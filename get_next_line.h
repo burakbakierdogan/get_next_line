@@ -30,6 +30,7 @@
 
 char	*get_next_line(int fd);
 
+int	ft_start(int fd, char *buf);
 
 
 
