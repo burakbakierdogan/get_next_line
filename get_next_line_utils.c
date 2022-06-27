@@ -12,8 +12,6 @@
 
 #include "get_next_line.h"
 
-
-
 int	ft_start(int fd, char *buf)
 {
 	int	rret;
@@ -38,29 +36,29 @@ int	ft_is_nl(char *buf, int size)
 	return (index);
 }
 
-int	ft_len(char *buf)
+int	ft_len(char *buf, int size)
 {
 	int	index;
 
 	index = 0;
-	while (buf[index] != '\n' || buf[index] != '\0')
+	while (buf[index] != '\n' && index < size)
+		index++;
+	if (index)
 		index++;
 	return (index);
 }
 
-char	*ft_move(char *dest, char *source, int size)
+void	ft_move(char *dest, char *source, int size)
 {
 	int		index;
 	char	*temp;
 
 	index = 0;
 	temp = (char *) malloc ((size + 1) * sizeof(char));
-	if (!temp)
-		return (NULL);
 	while (index < size)
 	{
 		temp[index] = source[index];
-		size++;
+		index++;
 	}
 	index = 0;
 	while (index < size)
@@ -69,18 +67,16 @@ char	*ft_move(char *dest, char *source, int size)
 		index++;
 	}
 	free (temp);
-	return (dest);
-
 }
 
-char	*ft_newstr(char *buf, char size)
+char	*ft_newstr(char *buf, int size)
 {
 	int		len;
 	int		index;
 	char	*str;
 
 	index = 0;
-	len = ft_len(buf);
+	len = ft_len(buf, size);
 	str = (char *) malloc ((len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
@@ -99,7 +95,7 @@ char	*ft_write(char *buf, int fd, int rret)
 	int		index;
 	char	*str;
 
-	index = rret;
+	index = 0;
 	while (ft_is_nl(buf, rret) == 0)
 	{
 		index = read (fd, buf + rret, BUFFER_SIZE);

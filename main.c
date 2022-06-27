@@ -22,8 +22,11 @@ int main ()
 
 
 
-		str = get_next_line(fd);
-		printf("%s", str);
+		while (n--)
+		{
+			str = get_next_line(fd);
+			printf("%s", str);
+		}
 
 }
 

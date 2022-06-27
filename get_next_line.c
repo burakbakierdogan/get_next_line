@@ -12,9 +12,6 @@
 
 #include "get_next_line.h"
 
-
-
-
 char	*get_next_line(int fd)
 {
 	static char	*buf = NULL;
@@ -32,14 +29,17 @@ char	*get_next_line(int fd)
 	if (ft_is_nl(buf, rret))
 	{
 		str = ft_newstr(buf, rret);
-		rret -= ft_len(buf);
+		rret -= ft_len(str, rret);
 	}
 	else
 	{
 		str = ft_write(buf, fd, rret);
 		if (!str)
+		{
 			return (buf);
-		rret = ft_len(buf);
+			rret = 0;
+		}
+		rret -= ft_len(str, rret);
 	}
 	return (str);
 }
