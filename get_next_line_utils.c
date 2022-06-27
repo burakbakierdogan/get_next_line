@@ -43,7 +43,7 @@ int	ft_len(char *buf, int size)
 	index = 0;
 	while (buf[index] != '\n' && index < size)
 		index++;
-	if (index)
+	if (buf[index] == '\n')
 		index++;
 	return (index);
 }
