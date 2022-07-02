@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:29:04 by berdogan          #+#    #+#             */
-/*   Updated: 2022/06/13 15:09:50 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/07/02 14:04:41 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@
 # endif
 
 char	*get_next_line(int fd);
-
-int		ft_start(int fd, char *buf);
-int		ft_is_nl(char *buf, int size);
-int		ft_len(char *buf, int size);
-void	ft_move(char *dest, char *source, int size);
-char	*ft_newstr(char *buf, int size);
-char	*ft_write(char *buf, int fd, int rret);
-
-
 
 
 
