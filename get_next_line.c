@@ -6,48 +6,59 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:28:57 by berdogan          #+#    #+#             */
-/*   Updated: 2022/07/03 07:09:57 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/09/25 04:41:08 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_container(int fd, char *container)
+static	t_gnl	ft_read(char *rest, int fd)
 {
-	int		rret;
-	char	*buf;
+	t_gnl	ret_val;
+	char	*new;
+	int		i;
 
-	buf = (char *) malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buf)
-		return (NULL);
-	rret = 1;
-	while (!ft_strchr(container, '\n') && rret != 0)
+	i = 2;
+	new = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	while(i > 0)
 	{
-		rret = read (fd, buf, BUFFER_SIZE);
-		if (rret == -1)
+		i = read(fd, new, BUFFER_SIZE);
+		new[i] = '\0';
+		if (ft_is_nl(new))
 		{
-			free(buf);
-			return (NULL);
+			rest = ft_append(rest, new);
+			break;
 		}
-		buf[rret] = '\0';
-		container = ft_str_merge(container, buf);
+		else
+		rest = ft_append(rest, new);
 	}
-	free (buf);
-	return (container);
+	free(new);
+	ret_val = ft_seperate(rest, i);
+	return(ret_val);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*ret;
-	static char	*container;
+	static char	*container[1024]; // static adress array holder.
+	t_gnl		ret_vals; // return values.
 
-	if (fd < 0 || BUFFER_SIZE < 0)
-		return (0);
-	container = ft_container(fd, container);
-	if (!container)
+	if (ft_is_nl(container[fd]))
+	{
+		ret_vals = ft_seperate(container[fd], 1);
+		container[fd] = ret_vals.rest;
+		return(ret_vals.str);
+	}
+	else
+	{
+		ret_vals = ft_read(container[fd], fd);
+		container[fd] = ret_vals.rest;
+	}
+	if (!ret_vals.rest && ret_vals.status <= 0)
 		return (NULL);
-	container = ft_container(fd, container);
-	ret = ft_ret_line(container);
-	container = ft_new_contaier(container);
-	return (ret);
+	if (ret_vals.str)
+		return(ret_vals.str);
+	else if (ret_vals.rest && ret_vals.status <= 0)
+		return(ret_vals.rest);
+	else
+		return(NULL);
 }

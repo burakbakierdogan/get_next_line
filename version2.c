@@ -46,15 +46,17 @@ static	char	*ft_append(char *str1, char *str2)
 	i = ft_lenn(str1);
 	j = ft_lenn(str2);
 	new = malloc(sizeof(char) * (i + j + 1));
-	i = -1;
+	i = 0;
+	j= 0;
 	if (str1)
-	while (str1[++i])
+	while (str1[i])
+	{
 		new[i] = str1[i];
-	if (!str1)
 		i++;
-	j = 0;
+	}
 	while(str2[j])
 		new[i++] = str2[j++];
+	new[i] = '\0';
 	if (str1)
 		free(str1);
 	return(new);

@@ -6,120 +6,107 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:29:01 by berdogan          #+#    #+#             */
-/*   Updated: 2022/07/03 07:14:38 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/09/25 04:40:54 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *str)
-{
-	int	index;
-
-	index = 0;
-	if (!str)
-		return (0);
-	while (str[index] != '\0')
-		index++;
-	return (index);
-}
-
-char	*ft_strchr(char *s, int c)
+int	ft_is_nl(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
-	while (s[i] != '\0')
+	if (!str)
+		return(0);
+	while(str[i])
+		if (str[i++] == '\n')
+			return(1);
+	return(0);
+}
+
+int	ft_lenn(char *str)
+{
+	int	i;
+	if (!str)
+		return(0);
+	i = 0;
+	while (str[i])
+		i++;
+	return(i);
+}
+
+char	*ft_append(char *str1, char *str2)
+{
+	int		i;
+	int		j;
+	char	*new;
+
+	i = ft_lenn(str1);
+	j = ft_lenn(str2);
+	new = malloc(sizeof(char) * (i + j + 1));
+	i = 0;
+	j= 0;
+	if (str1)
+	while (str1[i])
 	{
-		if (s[i] == (char) c)
-			return ((char *)&s[i]);
+		new[i] = str1[i];
 		i++;
 	}
-	return (0);
+	while(str2[j])
+		new[i++] = str2[j++];
+	new[i] = '\0';
+	if (str1)
+		free(str1);
+	return(new);
 }
 
-char	*ft_str_merge(char *container, char *buf)
+char	*ft_move_rest(char *rest, char *to_free)
 {
-	int		index;
-	int		index2;
-	char	*str;
+	int		i;
+	char	*new;
 
-	index = -1;
-	index2 = 0;
-	if (!container)
+	i = 0;
+	if (rest[i])
 	{
-		container = (char *) malloc (1 * sizeof(char));
-		container[0] = '\0';
+		while (rest[i])
+			i++;
+		new = malloc((i + 1) * sizeof(char));
+		i = -1;
+		while(rest[++i])
+			new[i] = rest[i];
+		new[i] = '\0';
+		free(to_free);
+		return(new);
 	}
-	if (!container || !buf)
-		return (NULL);
-	str = malloc (ft_strlen(buf) + ft_strlen(container) + 1 * sizeof(char));
-	if (!str)
-		return (NULL);
-	if (container)
-		while (container[++index])
-			str[index] = container[index];
-	while (buf[index2])
-		str[index++] = buf[index2++];
-	str[ft_strlen(container) + ft_strlen(buf)] = '\0';
-	free (container);
-	return (str);
+	else
+	{
+		free(to_free);
+		return(NULL);
+	}
 }
 
-char	*ft_ret_line(char *container)
+t_gnl	ft_seperate(char *str, int j)
 {
-	int		index;
-	char	*ret;
+	char	*new;
+	int		i;
+	t_gnl	ret_val;
 
-	index = 0;
-	if (!container[index])
-		return (NULL);
-	while (container[index] && container[index] != '\n')
-		index++;
-	ret = (char *) malloc (sizeof(char) * (index + 2));
-	if (!ret)
-		return (NULL);
-	index = 0;
-	while (container[index] && container[index] != '\n')
+	i = 0;
+	while (str[i] != '\n' && str[i])
+		i++;
+	new = (char *) malloc ((i + 2) * sizeof(char));
+	i = 0;
+	while (str[i] != '\n' && str[i])
 	{
-		ret[index] = container[index];
-		index++;
+		new[i] = str[i];
+		i++;
 	}
-	if (container[index] == '\n')
-	{
-		ret[index] = container[index];
-		index++;
-	}
-	ret[index] = '\0';
-	return (ret);
-}
-
-char	*ft_new_contaier(char *container)
-{
-	int		index;
-	int		index2;
-	char	*str;
-
-	index = 0;
-	while (container[index] && container[index] != '\n')
-		index++;
-	if (!container[index])
-	{
-		free (container);
-		return (NULL);
-	}
-	str = (char *) malloc (sizeof(char) * (ft_strlen(container) - index + 1));
-	if (!str)
-		return (NULL);
-	index++;
-	index2 = 0;
-	while (container[index])
-		str[index2++] = container[index++];
-	str[index2++] = '\0';
-	free(container);
-	return (str);
+	if (str[i] == '\n')
+		new[i++] = '\n';
+	new[i] = '\0';
+	ret_val.str = new;
+	ret_val.rest = ft_move_rest(str + i, str);
+	ret_val.status = j;
+	return(ret_val);
 }
