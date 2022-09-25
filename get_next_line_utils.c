@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:29:01 by berdogan          #+#    #+#             */
-/*   Updated: 2022/09/25 04:40:54 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/09/25 05:38:11 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,23 @@ int	ft_is_nl(char *str)
 
 	i = 0;
 	if (!str)
-		return(0);
-	while(str[i])
+		return (0);
+	while (str[i])
 		if (str[i++] == '\n')
-			return(1);
-	return(0);
+			return (1);
+	return (0);
 }
 
 int	ft_lenn(char *str)
 {
 	int	i;
-	if (!str)
-		return(0);
+
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 		i++;
-	return(i);
+	return (i);
 }
 
 char	*ft_append(char *str1, char *str2)
@@ -42,23 +43,25 @@ char	*ft_append(char *str1, char *str2)
 	int		j;
 	char	*new;
 
-	i = ft_lenn(str1);
-	j = ft_lenn(str2);
+	i = ft_lenn (str1);
+	j = ft_lenn (str2);
 	new = malloc(sizeof(char) * (i + j + 1));
 	i = 0;
-	j= 0;
+	j = 0;
 	if (str1)
-	while (str1[i])
 	{
-		new[i] = str1[i];
-		i++;
+		while (str1[i])
+		{
+			new[i] = str1[i];
+			i++;
+		}
 	}
-	while(str2[j])
+	while (str2[j])
 		new[i++] = str2[j++];
 	new[i] = '\0';
 	if (str1)
-		free(str1);
-	return(new);
+		free (str1);
+	return (new);
 }
 
 char	*ft_move_rest(char *rest, char *to_free)
@@ -73,16 +76,16 @@ char	*ft_move_rest(char *rest, char *to_free)
 			i++;
 		new = malloc((i + 1) * sizeof(char));
 		i = -1;
-		while(rest[++i])
+		while (rest[++i])
 			new[i] = rest[i];
 		new[i] = '\0';
-		free(to_free);
-		return(new);
+		free (to_free);
+		return (new);
 	}
 	else
 	{
-		free(to_free);
-		return(NULL);
+		free (to_free);
+		return (NULL);
 	}
 }
 
@@ -108,5 +111,5 @@ t_gnl	ft_seperate(char *str, int j)
 	ret_val.str = new;
 	ret_val.rest = ft_move_rest(str + i, str);
 	ret_val.status = j;
-	return(ret_val);
+	return (ret_val);
 }
