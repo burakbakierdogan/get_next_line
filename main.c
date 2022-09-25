@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:26:40 by berdogan          #+#    #+#             */
-/*   Updated: 2022/09/24 23:55:56 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/09/25 04:06:47 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main ()
 	char *str;
 	//printf("%d\n", fd);
 
-	int n = 20;
+	int n = 100;
 
 
 

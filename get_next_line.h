@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:29:04 by berdogan          #+#    #+#             */
-/*   Updated: 2022/09/25 00:14:24 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/09/25 03:32:56 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <string.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 10
 # endif
 
 char	*get_next_line(int fd);
