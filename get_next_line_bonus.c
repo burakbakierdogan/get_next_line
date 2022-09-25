@@ -6,7 +6,7 @@
 /*   By: berdogan <berdogan@student.42kocaeli.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 14:04:00 by berdogan          #+#    #+#             */
-/*   Updated: 2022/09/25 14:04:00 by berdogan         ###   ########.fr       */
+/*   Updated: 2022/09/26 01:34:17 by berdogan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (container[fd] && ft_is_nl (container[fd]) )
+	if (container[fd] && ft_is_nl (container[fd]))
 	{
 		ret_vals = ft_seperate (container[fd], 1);
 		container[fd] = ret_vals.rest;
@@ -57,8 +57,8 @@ char	*get_next_line(int fd)
 	}
 	if (!ret_vals.rest && ret_vals.status <= 0)
 	{
-			free(ret_vals.str);
-			return (NULL);
+		free (ret_vals.str);
+		return (NULL);
 	}
 	if (ret_vals.str)
 		return (ret_vals.str);
