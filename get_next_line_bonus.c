@@ -39,7 +39,7 @@ static	t_gnl	ft_read(char *rest, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*container[2048];
+	static char	*container[99999];
 	t_gnl		ret_vals;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -56,11 +56,12 @@ char	*get_next_line(int fd)
 		container[fd] = ret_vals.rest;
 	}
 	if (!ret_vals.rest && ret_vals.status <= 0)
-		return (NULL);
+	{
+			free(ret_vals.str);
+			return (NULL);
+	}
 	if (ret_vals.str)
 		return (ret_vals.str);
-	else if (ret_vals.rest && ret_vals.status <= 0)
-		return (ret_vals.rest);
 	else
 		return (NULL);
 }
